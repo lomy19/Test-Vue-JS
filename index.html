@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <h1>Tous mes pitits tests !</h1>
+        
+        <!-- Test 01 -->
+        <h2>Test 01</h2>
+        <div id="app">
+            {{ message }}
+        </div>
+        
+        <!-- Test 02 -->
+        <h2>Test 02</h2>
+        <div id="app-2">
+            <span v-bind:title="message">
+              Hover your mouse over me for a few seconds
+              to see my dynamically bound title!
+            </span>
+        </div>
+
+        <!-- Test 03 -->
+        <h2>Test 03</h2>
+        <div id="app-3">
+            <span v-if="seen">Now you see me</span>
+        </div>
+
+        <!-- Test 04 -->
+        <h2>Test 04</h2>
+        <div id="app-4">
+            <ol>
+              <li v-for="todo in todos">
+                {{ todo.text }}
+              </li>
+            </ol>
+        </div>
+
+        <!-- Test 05 -->
+        <h2>Test 05</h2>
+        <div id="app-5">
+            <p>{{ message }}</p>
+            <button v-on:click="reverseMessage">Reverse Message</button>
+        </div>
+
+        <!-- Test 06 -->
+        <h2>Test 06</h2>
+        <div id="app-6">
+            <p>{{ message }}</p>
+            <input v-model="message">
+        </div>
+
+        <!-- Test 07 -->
+        <h2>Test 07</h2>
+        <div id="app-7">
+            <ol>
+              <!--
+                Now we provide each todo-item with the todo object
+                it's representing, so that its content can be dynamic.
+                We also need to provide each component with a "key",
+                which will be explained later.
+              -->
+              <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id"
+              ></todo-item>
+            </ol>
+        </div>
+
+        <!-- Test 08 -->
+        <h2>Test 08</h2>
+        <div id="todo-list-example">
+          <form v-on:submit.prevent="addNewTodo">
+            <label for="new-todo">Add a todo</label>
+            <input
+              v-model="newTodoText"
+              id="new-todo"
+              placeholder="Entre votre texte"
+            >
+            <button>Add</button>
+          </form>
+          <ul>
+            <li
+              is="todo-item"
+              v-for="(todo, index) in todos"
+              v-bind:key="todo.id"
+              v-bind:title="todo.title"
+              v-on:remove="todos.splice(index, 1)"
+            ></li>
+          </ul>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
